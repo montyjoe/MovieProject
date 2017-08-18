@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>register here</h1>
+
+    <!-- User registration form  -->
+    <form class="register-form" action="/register_account" method="POST">
+      {% csrf_token %}
+      <p>First Name:</p><input type="text" name="first_name">
+      <p>Last Name:</p><input type="text" name="last_name">
+      <p>Email:</p><input type="email" name="email">
+      <p>Password:</p><input type="password" name="password">
+      <input type="submit" name="sumbit">
+    </form>
+  </body>
+</html>
