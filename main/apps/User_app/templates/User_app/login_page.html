@@ -8,8 +8,9 @@
     <h1>Please Login</h1>
 
     <!-- login form  -->
-    <form class="login" action="index.html" method="post">
-      <p>Email:</p>  <input type="email" name="email">
+    <form class="login" action="/log_user_in" method="post">
+      {% csrf_token %}
+      <p>Email:</p><input type="email" name="email">
       <p>Password:</p><input type="password" name="password">
       <br> <!--remove this when css ing  -->
       <input type="submit" name="submit">
