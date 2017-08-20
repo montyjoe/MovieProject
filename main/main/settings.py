@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'apps.User_app', #The user is for creating a user and loging in with that user
-    'apps.homeApp', # The home app will be where we house or home fucntions 
+    'apps.homeApp', # The home app will be where we house or home fucntions
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

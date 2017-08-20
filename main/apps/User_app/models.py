@@ -89,3 +89,17 @@ class User(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = UserManager()
+
+# this is the model for the profile thats attached to a user =======
+class Profile(models.Model):
+    email = models.CharField(max_length=100, default='null')
+    birthday = models.DateField()
+    hometown = models.CharField(max_length=100)
+    country = models.CharField(max_length=100)
+    user_id = models.ForeignKey(User, related_name='users')
+
+#this is the Model for our movies ==================
+class Movie(models.Model):
+    title = models.CharField(max_length=100)
+    release_date = models.DateField()
+    imgUrl = models.TextField()
