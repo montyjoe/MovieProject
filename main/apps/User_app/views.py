@@ -31,10 +31,14 @@ def register_account(request): #this function creates the account
             # =================
             # storing session info to pull on the home page
             # =================
+            #************************************************************
+            # not sure if we need to store all this informartion
             request.session['email'] = result['user'].email
             request.session['name'] = result['user'].first_name
             request.session['user'] = result['user'].id
+            #************************************************************
             request.session['action'] = "registered"
+
             return redirect('/home')
         else:
             print result['errors']
