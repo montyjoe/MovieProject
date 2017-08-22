@@ -5,7 +5,6 @@ urlpatterns = [
     #GET
     url(r'^login$', views.login_page),
     url(r'^register$', views.register_page),
-    url(r'^home$', views.home),
     url(r'^profile$', views.profile),
 
     #POSTS
