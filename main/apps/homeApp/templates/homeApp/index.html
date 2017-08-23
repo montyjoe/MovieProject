@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<!-- image path https://image.tmdb.org/t/p/w500/ -->
+
 <html>
   <head>
     <meta charset="utf-8">
@@ -6,10 +8,21 @@
   </head>
   <body>
 
-
     <h1>this is going to be the intro page</h1>
+    <a href="/profile">My Profile</a>
+    <a href="/logout">Logout</a>
 
-
-
+    <p>{{ status }}</p>
+    <h2>Discover Movies</h2>
+    <!-- <form class="testing" action="/testing" method="post">
+      {% csrf_token %}
+      <input type="submit">
+    </form> -->
+    {% for movie in result %}
+    <p>{{ movie.title }}</p>
+    <a href="/movie/{{ movie.id }}">
+      <img style="width:50px"src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" >
+    </a>
+    {% endfor %}
   </body>
 </html>

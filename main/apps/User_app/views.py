@@ -18,7 +18,7 @@ def register_page(request): #renders the register page template
 
 def profile(request):
     if 'user' not in request.session:
-        return redirect('/register')
+        return redirect('/login')
     username = request.session['name']
     profile = Profile.objects.filter(user_id = User.objects.get(id = request.session['user']))
     context = {
@@ -79,12 +79,9 @@ def createProfile(request):
     return redirect('/profile')
 
 
-
 def logout(request):
     request.session.clear()
-    return redirect('/login')
-
-
+    return redirect('/')
 
 
 
