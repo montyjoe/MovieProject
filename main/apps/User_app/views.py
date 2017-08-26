@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from .models import User, Profile, Movie
+from django.core.urlresolvers import reverse
 """
 things that need to be added?
 1. validation messages
-2. make sure that password is protected using Bcrtp and confirm password
+2. make sure that password is protected using Bcrpt and confirm password
 
 """
 # Create your views here.

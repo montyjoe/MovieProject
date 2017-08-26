@@ -11,5 +11,9 @@ def movie_page(request, id):
     return render(request, 'movieApp/movie_page.html', page_info )
 
 def cast_page(request, id):
-    person = services.get_person(id)
-    return render(request, 'movieApp/cast_page.html', {'person': person})
+    person_info = services.get_person(id)
+    person = {
+        'details': person_info['details'],
+        'credits': person_info['credits']
+    }
+    return render(request, 'movieApp/cast_page.html', person )

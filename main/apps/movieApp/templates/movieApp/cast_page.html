@@ -6,7 +6,20 @@
   </head>
   <body>
     <h1>This is for the Actors</h1>
+      <img style="width:200px" src="https://image.tmdb.org/t/p/w500/{{ details.profile_path }}">
 
-    <p>{{ person }}</p>
+      <p>{{ details.name }}</p>
+
+
+      <!-- SHOULD WE MIX TV AND MOVIES OR COMBINE THEM INTO ONE?? -->
+      <h3>Top Movies</h3>
+    {% for role in credits.cast|slice:":5" %}
+      <a href="/movie/{{ role.id }}">
+      <img style="width:50px" src="https://image.tmdb.org/t/p/w500/{{ role.poster_path }}">
+      </a>
+      <p>{{ role.title }}</p>
+      <p>{{ role.character }}</p>
+      <p>------------------------</p>
+    {% endfor %}
   </body>
 </html>
