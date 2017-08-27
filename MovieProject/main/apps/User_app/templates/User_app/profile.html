@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Profile</title>
+  </head>
+  <body>
+    <a href="/">Home</a>
+    <a href="/logout">Logout</a>
+    <div class="general">
+      <h1>{{ username }}'s Profile</h1>
+      <img src="" alt="">
+      {% if profile %}
+      {% for item in profile %}
+      <h3>Contact Information</h3>
+      <p>Email:  {{ item.user_id.email}}</p>
+      <h3>General Information</h3>
+      <p>Birthday: {{item.birthday}}</p>
+      <p>Hometown: {{item.hometown}}</p>
+      <p>Country: {{item.country}}</p>
+      {% endfor %}
+      {% else %}
+      <form class="" action="/createProfile" method="post">
+        {% csrf_token %}
+        Birthday:
+        <input type="date" name="birthday" value="">
+        Hometown:
+        <input type="text" name="hometown" value="">
+        Country:
+        <input type="text" name="country" value="">
+        <input type="submit" name="" value="Submit">
+      </form>
+      {% endif %}
+
+    </div>
+    <div class="movieList">
+      <h2>My Movies</h2>
+
+    </div>
+
+
+
+  </body>
+</html>
