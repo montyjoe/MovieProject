@@ -1,0 +1,53 @@
+.users {
+  height: 220px;
+  width: 200px;
+  outline: 2px solid black;
+  overflow: auto;
+  display: inline-block;
+  position: absolute;
+  margin-left: 930px;
+  text-align: center;
+}
+.users a {
+  text-decoration: none;
+}
+.user {
+  height: 90px;
+  width: 90px;
+  display: inline-block;
+}
+.friends {
+  height: 220px;
+  width: 200px;
+  outline: 2px solid black;
+  overflow: auto;
+  position: absolute;
+  margin-left: 930px;
+  margin-top: 230px;
+  display: grid;
+  text-align: center;
+}
+
+.topBar {
+  text-align: right;
+  margin-right: 15px;
+  margin-bottom: 20px;
+  display: inline-block;
+}
+.topBar a {
+  text-decoration: none;
+
+}
+.movies {
+  width: 69%;
+  height: auto;
+  /*outline: 2px solid black;*/
+  display: inline-block;
+  text-align: center;
+}
+.movie {
+  height: 200px;
+  width: 200px;
+  /*outline: 1px solid red;*/
+  display: inline-block;
+}

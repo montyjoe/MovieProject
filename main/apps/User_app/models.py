@@ -73,9 +73,6 @@ class UserManager(models.Manager):
             errors.append('Email or password is incorrect')
             return {'user': None, 'errors': errors }
 
-
-
-
 # =================================================================
 # Models
 # =================================================================
@@ -96,8 +93,33 @@ class Profile(models.Model):
     birthday = models.DateField()
     hometown = models.CharField(max_length=100)
     country = models.CharField(max_length=100)
-    user_id = models.ForeignKey(User, related_name='users')
+    user_id = models.ForeignKey(User, related_name='profile')
 
 #this is the Model for our movies ==================
 class Movie(models.Model):
     api_Movie_code = models.CharField(max_length=100)
+
+# establishes a friendship so user can see friends list =========
+
+class Friend(models.Model):
+    users = models.ManyToManyField(User, related_name='friend_set')
+    current_user = models.ForeignKey(User, related_name='owner', null=True)
+
+    # method for adding friends=========
+
+    # don't know why these methods aren't being recognized when I call on them----------------------------------------
+    @classmethod
+    def add_friend(cls, current_user, new_friend):
+        friend, created = cls.objects.get_or_create(
+        current_user=current_user
+        )
+        friend.users.add(new_friend)
+
+    #  method for removing friends =======
+
+    @classmethod
+    def lose_friend(cls, current_user, new_friend):
+        friend, created = cls.objects.get_or_create(
+        current_user=current_user
+        )
+        friend.users.remove(new_friend)

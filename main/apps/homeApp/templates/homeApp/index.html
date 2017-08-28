@@ -5,24 +5,117 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" media="all" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript">
+    </script> <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" type="text/javascript"></script>
+    <script>
+
+    $(function() {
+      $("#places").autocomplete({
+        source: "/api/get_places",
+        select: function (event, ui) { //item selected
+          AutoCompleteSelectHandler(event, ui)
+        },
+        minLength: 2,
+      });
+    });
+
+    function AutoCompleteSelectHandler(event, ui)
+    {
+      var selectedObj = ui.item;
+    }
+
+    </script>
+
+
+
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'User_app/home.css' %}">
   </head>
   <body>
+    <div class="topBar">
+      <div class="ui-widget">
+        <!-- <label for="places">Search People: </label> -->
+        <input value='Search' id="places">
+      </div>
 
-    <h1>this is going to be the intro page</h1>
-    <a href="/profile">My Profile</a>
-    <a href="/logout">Logout</a>
+      {% if request.session.action == "logged in" or request.session.action == "registered" %}
+      <a href="/profile">Profile</a>
+      <a href="/logout">Logout</a>
+      {% else%}
+      <a href="/login">Login</a>
+      <a href="/register">Register</a>
+      {% endif %}
 
-    <p>{{ status }}</p>
-    <h2>Discover Movies</h2>
+    </div>
+    {% if not profile and status == 'You are logged in' %}
+    <h1>Welcome!</h1>
+    <h2>Please fill out this profile information</h2>
+    <form class="" action="/createProfile" method="post">
+      {% csrf_token %}
+      Birthday:
+      <input type="date" name="birthday" value="">
+      Hometown:
+      <input type="text" name="hometown" value="">
+      Country:
+      <input type="text" name="country" value="">
+      <input type="submit" name="" value="Submit">
+    </form>
+
+    <!-- returning users are brought to home page  -->
+
+    {% elif request.session.action == "logged in" %}
+    <h1>Welcome back!</h1>
+    {% endif %}
+    <div class="users">
+      {% if request.session.action == "logged in" or request.session.action == "registered" %}
+      <h3>People You May Know</h3>
+      {% else %}
+      <h2>Current Users</h2>
+      {% endif %}
+      {% for user in users %}
+      <div class="user">
+
+      <img src="{% static "User_app/blankUser.png" %}" width="50" height="50"/>
+      <a href="/user/{{ user.id }}"><h3>{{user.first_name}}</h3></a>
+      {% if status == 'You are logged in' %}
+      <a href="/connect/add/{{user.id}}"><button type="button" name="button">Add Friend</button></a><br>
+      {% endif %}
+    </div>
+      {% endfor %}
+
+
+    </div>
+    {% if status == 'You are logged in' %}
+    <div class="friends">
+
+    <h2>Friends</h2>
+    {% for friend in friends %}
+    <img src="{% static "User_app/blankUser.png" %}" width="50" height="50"/>
+    <a href="/user/{{ friend.id }}">{{friend.first_name}}</a>
+    <a href="/connect/remove/{{friend.id}}">
+      <button type="button" name="button">Remove Friend</button>
+    </a>
+    {% endfor %}
+  </div>
+  {% endif %}
+  <div class="movies">
+
+
+    <h1>Discover Movies</h1>
     <!-- <form class="testing" action="/testing" method="post">
       {% csrf_token %}
       <input type="submit">
     </form> -->
     {% for movie in result %}
-    <p>{{ movie.title }}</p>
-    <a href="/movie/{{ movie.id }}">
-      <img style="width:50px"src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" >
-    </a>
+    <div class="movie">
+      <a href="/movie/{{ movie.id }}">
+        <img style="width:100px"src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" >
+      </a>
+      <p>{{ movie.title }}</p>
+
+    </div>
     {% endfor %}
+  </div>
   </body>
 </html>

@@ -21,5 +21,6 @@ urlpatterns = [
     url(r'^', include('apps.User_app.urls')),
     url(r'^', include('apps.homeApp.urls')),
     url(r'^', include('apps.movieApp.urls')),
+    # url(r'^friendship/', include('friendship.urls'))
 
 ]

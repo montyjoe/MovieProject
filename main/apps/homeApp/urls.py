@@ -1,8 +1,11 @@
 from django.conf.urls import url, include
 from . import views
+# from views import AutoCompleteView
 
 urlpatterns = [
     url(r'^$', views.index),
     url(r'^testing$', views.testing),
+    url(r'^api/get_places', views.get_places, name='get_places'),
+    # url(r'^autocomplete/$', AutoCompleteView.as_view(), name='autocomplete'),
 
 ]

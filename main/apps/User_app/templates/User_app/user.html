@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Users Page</title>
+    {% load staticfiles %}
+  </head>
+  <body>
+    <a href="/">Home</a>
+    {% if request.session.user %}
+    <a href="/logout">Logout</a>
+    {% endif %}
+    <div class="userPage">
+      {% for user in users %}
+      <img src="{% static "User_app/blankUser.png" %}" width="150" height="150"/>
+      <h1>{{ user.first_name}}'s Profile</h1>
+
+      {% endfor %}
+
+    </div>
+    <div class="profileInfo">
+      <h2>Profile Info</h2>
+      {% for user in users %}
+      <h3>Contact Information</h3>
+      <p>Email:  {{ user.email }}</p>
+      <h3>General Information</h3>
+
+      <!-- dont know why this isn't showing up ----------------------------------->
+      <p>Birthday: {{ profile.birthday }}</p>
+      <p>Hometown: {{ profile.hometown }}</p>
+      <p>Country: {{ profile.country }}</p>
+
+      {% endfor %}
+
+
+    </div>
+    <div class="movieList">
+      <h2>Movie List</h2>
+
+    </div>
+
+
+  </body>
+</html>
