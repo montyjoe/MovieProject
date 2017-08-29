@@ -35,8 +35,12 @@
   <body>
     <div class="topBar">
       <div class="ui-widget">
-        <!-- <label for="places">Search People: </label> -->
-        <input value='Search' id="places">
+        <form class="" action="/search" method="post">
+          {% csrf_token %}
+        <label for="places">Search People: </label>
+        <input name="person" id="places">
+        <input type="submit" name="search" value="Search">
+      </form>
       </div>
 
       {% if request.session.action == "logged in" or request.session.action == "registered" %}
@@ -67,15 +71,15 @@
     {% elif request.session.action == "logged in" %}
     <h1>Welcome back!</h1>
     {% endif %}
-    <div class="users">
+    <!-- <div class="users">
       {% if request.session.action == "logged in" or request.session.action == "registered" %}
       <h3>People You May Know</h3>
       {% else %}
       <h2>Current Users</h2>
       {% endif %}
+
       {% for user in users %}
       <div class="user">
-
       <img src="{% static "User_app/blankUser.png" %}" width="50" height="50"/>
       <a href="/user/{{ user.id }}"><h3>{{user.first_name}}</h3></a>
       {% if status == 'You are logged in' %}
@@ -85,17 +89,18 @@
       {% endfor %}
 
 
-    </div>
+    </div> -->
     {% if status == 'You are logged in' %}
     <div class="friends">
 
     <h2>Friends</h2>
     {% for friend in friends %}
-    <img src="{% static "User_app/blankUser.png" %}" width="50" height="50"/>
-    <a href="/user/{{ friend.id }}">{{friend.first_name}}</a>
-    <a href="/connect/remove/{{friend.id}}">
-      <button type="button" name="button">Remove Friend</button>
-    </a>
+    <div class="friend">
+      <img src="{% static "User_app/blankUser.png" %}" width="50" height="50"/>
+      <a href="/user/{{ friend.id }}">{{friend.first_name}}</a>
+      <a href="/connect/remove/{{friend.id}}"><button type="button" name="button">Remove</button></a>
+
+    </div>
     {% endfor %}
   </div>
   {% endif %}

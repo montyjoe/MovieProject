@@ -1,11 +1,12 @@
-.users {
+/*.users {
   height: 220px;
-  width: 200px;
+  width: 210px;
   outline: 2px solid black;
   overflow: auto;
   display: inline-block;
   position: absolute;
-  margin-left: 930px;
+  margin-top: 0%;
+  margin-left: 80%;
   text-align: center;
 }
 .users a {
@@ -15,20 +16,30 @@
   height: 90px;
   width: 90px;
   display: inline-block;
-}
+}*/
 .friends {
   height: 220px;
-  width: 200px;
+  width: 210px;
   outline: 2px solid black;
   overflow: auto;
+  display: inline-block;
   position: absolute;
-  margin-left: 930px;
-  margin-top: 230px;
-  display: grid;
+  margin-top: 6%;
+  margin-left: 80%;
   text-align: center;
 }
 
+.friend {
+  height: 90px;
+  width: 90px;
+  display: inline-block;
+}
+.friend a {
+  text-decoration: none;
+}
+
 .topBar {
+  width: 95%;
   text-align: right;
   margin-right: 15px;
   margin-bottom: 20px;

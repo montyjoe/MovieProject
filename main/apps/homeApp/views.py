@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from . import services
 from ..User_app.models import User, Profile, Movie, Friend
 from ..User_app import views
@@ -54,8 +54,15 @@ def get_places(request):
     else:
         data = 'fail'
     mimetype = 'application/json'
+    print data
     return HttpResponse(data, mimetype)
 
+def search(request):
+    if request.method == 'POST':
+        count = User.objects.filter(first_name__icontains=request.POST['person']).count()
+        users = User.objects.filter(first_name__icontains=request.POST['person'])
+        print users
+        return render(request, 'homeApp/search.html', {'users' : users, 'count' : count})
 
 # def get_places(request):
 #   if request.is_ajax():

@@ -85,11 +85,13 @@ def createProfile(request):
 # renders the specific user page, other than the current user
 
 def user_page(request, id):
-    context = {
-    'users' : User.objects.filter(id = id),
-    'profile' : Profile.objects.get(user_id=id)
-    }
-    return render(request, 'User_app/user.html', context)
+    users = User.objects.filter(id = id)
+    try:
+        profile = Profile.objects.get(user_id=id)
+    except:
+        profile = "This user has not created a profile yet"
+
+    return render(request, 'User_app/user.html', { 'users': users, 'profile': profile })
 
 def logout(request):
     request.session.clear()
