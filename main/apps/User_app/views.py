@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import User, Profile, Movie, Friend
-from django.core.urlresolvers import reverse
+from ..movieApp.models import Watchlist
+
 
 """
 things that need to be added?
@@ -25,7 +26,8 @@ def profile(request):
     profile = Profile.objects.filter(user_id = User.objects.get(id = request.session['user']))
     context = {
     'profile' : profile,
-    'username' : username
+    'username' : username,
+    'watchlist': Watchlist.objects.filter(user=request.session["user"])
     }
     print request.session['user']
     return render(request, "User_app/profile.html", context)
