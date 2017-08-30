@@ -22,7 +22,7 @@ sept
 
 
 =============thing that are needed to be added still ================
-1. form validations (jordan M)
+1. form validations - validations are in, just need to be made prettier. no bcrypt yet
 2. notifications (jordan)
 3. movie list (Ryan) 
 4. upload images 
