@@ -16,18 +16,13 @@
       {% endif %}
     </div>
 
-    <h1>{{ movie.title }}</h1>
-    <img style="width:200px" src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}" >
+      <h1>{{ movie.title }}</h1>
+      <img style="width:200px" src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}" >
+      <div class="summary">
+        <h3>Summary</h3>
+        <p>{{ movie.overview }}</p>
 
-    <form class="add_to_watchlist" action="/movie/add/watchlist/{{movie.id}}" method="post">
-        {% csrf_token %}
-        <input type="submit" name="add_to_watchlist" value="Add to Watchlist">
-      </form>
-
-    <div class="summary">
-      <h3>Summary</h3>
-      <p>{{ movie.overview }}</p>
-    </div>
+      </div>
 
     <h3>cast</h3>
     <div class="cast-wrapper">
@@ -37,6 +32,7 @@
           <img style="width:100px" src="https://image.tmdb.org/t/p/w500{{person.profile_path}}">
         </a>
         <p>{{person.name}}</p>
+
       </div>
       {% endfor %}
 

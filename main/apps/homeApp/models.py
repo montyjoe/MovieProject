@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 from django.db import models
-from ..User_app.models import User, Movie
+from ..User_app.models import User, Movie, Friend
 
 # Create your models here.
 

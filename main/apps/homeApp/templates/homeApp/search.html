@@ -10,7 +10,7 @@
     {% for user in users %}
     <div class="user">
       <img src="{% static "User_app/blankUser.png" %}" width="50" height="50"/>
-      <a href="/user/{{ user.id }}"><h3>{{user.first_name}}</h3></a>
+      <a href="/user/{{ user.id }}"><h3>{{user.first_name}} {{user.last_name}}</h3></a>
       {% if request.session %}
       <a href="/connect/add/{{user.id}}"><button type="button" name="button">Add Friend</button></a><br>
       {% endif %}
