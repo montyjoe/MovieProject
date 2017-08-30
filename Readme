@@ -22,8 +22,8 @@ sept
 
 
 =============thing that are needed to be added still ================
-1. form validations 
-2. notifications 
+1. form validations (jordan M)
+2. notifications (jordan)
 3. movie list (Ryan) 
 4. upload images 
 5. rotten tomatoes api 
@@ -31,6 +31,17 @@ sept
           - how much 
           - how many thing to input ()
 7. movie search function  
+8. new feed 
+
+
+
+================completed================
+
+
+
+
+
+
 
 =============future ideas================
 1. like weather app 
@@ -39,13 +50,6 @@ sept
 
 
 
-
-
-model 
-
-notifications 
-
-notification message
 
 
 
