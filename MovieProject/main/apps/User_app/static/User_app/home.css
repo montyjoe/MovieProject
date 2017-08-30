@@ -1,9 +1,0 @@
-.users {
-  height: 220px;
-  width: 200px;
-  outline: 2px solid black;
-  overflow: auto;
-  display: grid;
-  margin-left: 930px;
-  padding-left: 20px;
-}
