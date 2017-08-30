@@ -43,5 +43,9 @@ def add_to_watchlist(request, id): # the post route adds a movie to the Users wa
             "movie": movie['movie_info'], # this is the data for the current movie being displayed
             "user_id": request.session['user'] # the logged in user id from session
         }
-        Watchlist.add_movie(data) #add movie to Watchlist
+        Watchlist.add_movie(data) # add movie to Watchlist
         return redirect('/movie/' + id)
+
+
+def delete_from_watchlist(request, id):
+    return

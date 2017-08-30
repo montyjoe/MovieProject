@@ -41,10 +41,7 @@ class Watchlist(models.Model): #creates a watchlist
     def add_movie(self, data):
         user = User.objects.get(id=data['user_id'])
         movie = data['movie']
-
-
         my_watchlist = Watchlist.objects.filter(user=user)
-
         for key in my_watchlist:
             print key
             if key.api_Movie_code == movie['id']:
@@ -58,3 +55,7 @@ class Watchlist(models.Model): #creates a watchlist
                     user = user
                 )
                 return
+
+    @classmethod
+    def remove(self, data):
+        return 
