@@ -2,31 +2,6 @@ from __future__ import unicode_literals
 from ..User_app.models import User
 from django.db import models
 
-# Create your models here.
-# Create your models here.
-# class WatchlistManager(models.Manager):
-#     def add_movie(self, data):
-#         user = User.objects.get(id=data['user_id'])
-#         movie = data['movie']
-#
-#
-#         my_watchlist = Watchlist.objects.filter(user=user)
-#
-#         for key in my_watchlist:
-#             print key
-#             if key.api_Movie_code == movie['id']:
-#                 print "movie already is in watchlist"
-#                 return
-#             else:
-#                 Watchlist.objects.create( #<-- add the movie to the watchlist
-#                     api_Movie_code = movie['id'],
-#                     movie_title = movie['title'],
-#                     poster_path = movie['poster_path'],
-#                     user = user
-#                 )
-#                 return
-
-
 
 class Watchlist(models.Model): #creates a watchlist
     api_Movie_code = models.CharField(max_length=100)
@@ -58,4 +33,4 @@ class Watchlist(models.Model): #creates a watchlist
 
     @classmethod
     def remove(self, data):
-        return 
+        return

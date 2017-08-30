@@ -48,4 +48,8 @@ def add_to_watchlist(request, id): # the post route adds a movie to the Users wa
 
 
 def delete_from_watchlist(request, id):
+    data = {
+        "id": id,
+    }
+    Watchlist.remove(data)
     return
