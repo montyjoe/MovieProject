@@ -19,10 +19,14 @@
     <h1>{{ movie.title }}</h1>
     <img style="width:200px" src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}" >
 
+    {% if in_list == False %}
     <form class="add_to_watchlist" action="/movie/add/watchlist/{{movie.id}}" method="post">
         {% csrf_token %}
         <input type="submit" name="add_to_watchlist" value="Add to Watchlist">
       </form>
+    {% else %}
+    <p>remove</p>
+    {% endif %}
 
     <div class="summary">
       <h3>Summary</h3>

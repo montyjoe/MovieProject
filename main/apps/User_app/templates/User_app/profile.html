@@ -37,7 +37,10 @@
     <div class="watch-list">
       <h2>Watchlist</h2>
         {% for movie in watchlist %}
+        <p>--------------------------</p>
         <p>{{ movie.movie_title }}</p>
+        <a href="movie/delete/watchlist/{{movie.id}}">Delete</a>
+        <p>--------------------------</p>
         {%endfor%}
     </div>
 
