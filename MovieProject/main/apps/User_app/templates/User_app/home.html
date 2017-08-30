@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>home</title>
+  </head>
+  <body>
+    <h1>This is not the real home</h1>
+    <div class="wrapper">
+      <!-- profile link  -->
+      <a href="/profile">My Profile</a>
+      <a href="/logout">Logout</a>
+
+      <!-- form shows up only if it's a new user  -->
+
+      {% if request.session.action == "registered" %}
+      <h1>Welcome, {{ username }}!</h1>
+      <h2>Please fill out this profile information</h2>
+      <form class="" action="/createProfile" method="post">
+        {% csrf_token %}
+        Birthday:
+        <input type="date" name="birthday" value="">
+        Hometown:
+        <input type="text" name="hometown" value="">
+        Country:
+        <input type="text" name="country" value="">
+        <input type="submit" name="" value="Submit">
+      </form>
+
+      <!-- returning users are brought to home page  -->
+
+      {% else %}
+      <h1>Welcome back, {{ username }}!</h1>
+      {% endif %}
+
+  </div>
+
+  </body>
+</html>

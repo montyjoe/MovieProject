@@ -5,25 +5,35 @@
   <head>
     <meta charset="utf-8">
     <title>Movie</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'movieApp/movies.css' %}">
   </head>
   <body>
     <div class="nav-bar">
       <a href="/">Home</a>
+      {% if request.session.user %}
+      <a href="/logout">Logout</a>
+      {% endif %}
     </div>
 
-    <h1>This will be the page that has to do with individual movies</h1>
-      <p>{{ movie.title }}</p>
+      <h1>{{ movie.title }}</h1>
       <img style="width:200px" src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}" >
-    <h3>Summary</h3>
-      <p>{{ movie.overview }}</p>
+      <div class="summary">
+        <h3>Summary</h3>
+        <p>{{ movie.overview }}</p>
+
+      </div>
 
     <h3>cast</h3>
     <div class="cast-wrapper">
       {% for person in cast.cast|slice:":10" %}
-      <a href="/people/{{person.id}}">
-        <img style="width:50px" src="https://image.tmdb.org/t/p/w500{{person.profile_path}}">
-      </a>
-      <p>{{person.name}}</p>
+      <div class="castMember">
+        <a href="/people/{{person.id}}">
+          <img style="width:100px" src="https://image.tmdb.org/t/p/w500{{person.profile_path}}">
+        </a>
+        <p>{{person.name}}</p>
+
+      </div>
       {% endfor %}
 
 

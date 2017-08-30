@@ -1,0 +1,64 @@
+/*.users {
+  height: 220px;
+  width: 210px;
+  outline: 2px solid black;
+  overflow: auto;
+  display: inline-block;
+  position: absolute;
+  margin-top: 0%;
+  margin-left: 80%;
+  text-align: center;
+}
+.users a {
+  text-decoration: none;
+}
+.user {
+  height: 90px;
+  width: 90px;
+  display: inline-block;
+}*/
+.friends {
+  height: 220px;
+  width: 210px;
+  outline: 2px solid black;
+  overflow: auto;
+  display: inline-block;
+  position: absolute;
+  margin-top: 6%;
+  margin-left: 80%;
+  text-align: center;
+}
+
+.friend {
+  height: 90px;
+  width: 90px;
+  display: inline-block;
+}
+.friend a {
+  text-decoration: none;
+}
+
+.topBar {
+  width: 95%;
+  text-align: right;
+  margin-right: 15px;
+  margin-bottom: 20px;
+  display: inline-block;
+}
+.topBar a {
+  text-decoration: none;
+
+}
+.movies {
+  width: 69%;
+  height: auto;
+  /*outline: 2px solid black;*/
+  display: inline-block;
+  text-align: center;
+}
+.movie {
+  height: 200px;
+  width: 200px;
+  /*outline: 1px solid red;*/
+  display: inline-block;
+}

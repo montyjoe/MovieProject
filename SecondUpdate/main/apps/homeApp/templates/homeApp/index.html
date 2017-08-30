@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<!-- image path https://image.tmdb.org/t/p/w500/ -->
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'User_app/home.css' %}">
+  </head>
+  <body>
+    {% if request.session.action == "logged in" or request.session.action == "registered" %}
+    <a href="/logout">Logout</a>
+    {% else%}
+    <a href="/login">Login</a>
+    {% endif %}
+    <a href="/profile">Profile</a>
+    {% if request.session.action == "registered" %}
+    <h1>Welcome!</h1>
+    <h2>Please fill out this profile information</h2>
+    <form class="" action="/createProfile" method="post">
+      {% csrf_token %}
+      Birthday:
+      <input type="date" name="birthday" value="">
+      Hometown:
+      <input type="text" name="hometown" value="">
+      Country:
+      <input type="text" name="country" value="">
+      <input type="submit" name="" value="Submit">
+    </form>
+
+    <!-- returning users are brought to home page  -->
+
+    {% elif request.session.action == "logged in" %}
+    <h1>Welcome back!</h1>
+    {% endif %}
+    <div class="users">
+      <h2>Current Users</h2>
+      {% for user in users %}
+      <img src="{% static "User_app/blankUser.png" %}" width="50" height="50"/>
+      <a href="/user/{{ user.id }}"><h3>{{user.first_name}}</h3></a>
+      <a href="/connect/add/{{user.id}}"><button type="button" name="button">Add Friend</button></a><br>
+      {% endfor %}
+
+
+    </div>
+    <h3>Friends</h3>
+    {% for friend in friends %}
+    <img src="{% static "User_app/blankUser.png" %}" width="50" height="50"/>
+    <a href="/user/{{ friend.id }}">{{friend.first_name}}</a>
+    <a href="/connect/remove/{{friend.id}}">
+      <button type="button" name="button">Remove Friend</button>
+    </a>
+    {% endfor %}
+
+    <p>{{ status }}</p>
+    <h2>Discover Movies</h2>
+    <!-- <form class="testing" action="/testing" method="post">
+      {% csrf_token %}
+      <input type="submit">
+    </form> -->
+    {% for movie in result %}
+    <p>{{ movie.title }}</p>
+    <a href="/movie/{{ movie.id }}">
+      <img style="width:50px"src="https://image.tmdb.org/t/p/w500/{{movie.poster_path}}" >
+    </a>
+    {% endfor %}
+  </body>
+</html>
