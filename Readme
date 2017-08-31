@@ -21,16 +21,19 @@ sept
 
 
 =============thing that are needed to be added still ================
-1. form validations - validations are in, just need to be made prettier. no bcrypt yet
-2. notifications (jordan)
-3. movie list (Ryan)
-4. upload images
-5. rotten tomatoes api
-6. how to figure out how to do reviews
+
+- need to fix the profile 
+- form validations - validations are in, just need to be made prettier. no bcrypt yet
+- notifications (jordan)
+- movie list (Ryan)
+- upload images
+- rotten tomatoes api
+- how to figure out how to do reviews
           - how much
           - how many thing to input ()
-7. movie search function
-8. new feed
+- movie search function
+- new feed
+- icons for things that are not in the in the database (actors movies)
 
 
 
