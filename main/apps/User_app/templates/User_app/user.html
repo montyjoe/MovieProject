@@ -15,6 +15,9 @@
       <img src="{% static "User_app/blankUser.png" %}" width="150" height="150"/>
       <h1>{{ user.first_name}}'s Profile</h1>
 
+      {% if request.session %}
+      <a href="/connect/add/{{user.id}}"><button type="button" name="button">Add Friend</button></a><br>
+      {% endif %}
       {% endfor %}
 
     </div>
