@@ -27,9 +27,10 @@ sept-----
 =============thing that are needed to be added still ================
 
 - need to fix the profile
-    -followers and following
-    -info should be hidden
-    -recent reviews
+    -followers
+    -following --done
+    -info should be hidden --done
+    -recent reviews --done
 
 - form validations - validations are in, just need to be made prettier. no bcrypt yet
 - notifications (jordan)
