@@ -43,12 +43,13 @@ def testing(request):
 def get_places(request):
     if request.is_ajax():
         q = request.GET.get('term', '')
-        users = User.objects.filter(first_name__icontains = q )[:20]
+        users = User.objects.filter(first_name__icontains = q )|User.objects.filter(last_name__icontains = q)| User.objects.filter(email__icontains = q)
+        users = users[:20]
         results = []
         for user in users:
             user_json = {}
             user_json['id'] = user.id
-            user_json['label'] = user.first_name
+            user_json['label'] = user.first_name + " " + user.last_name
             user_json['value'] = user.first_name
             results.append(user_json)
         data = json.dumps(results)
