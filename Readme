@@ -2,12 +2,15 @@
 *********** Installs *************
 Requests
 
+can you see this??
+
+
 
 =============schedule================
-30. 
-31. 
-sept 
-1. 
+30.
+31.
+sept
+1.
 2.
 3.
 4.
@@ -23,14 +26,14 @@ sept
 =============thing that are needed to be added still ================
 1. form validations - validations are in, just need to be made prettier. no bcrypt yet
 2. notifications (jordan)
-3. movie list (Ryan) 
-4. upload images 
-5. rotten tomatoes api 
-6. how to figure out how to do reviews 
-          - how much 
+3. movie list (Ryan)
+4. upload images
+5. rotten tomatoes api
+6. how to figure out how to do reviews
+          - how much
           - how many thing to input ()
-7. movie search function  
-8. new feed 
+7. movie search function
+8. new feed
 
 
 
@@ -43,17 +46,5 @@ sept
 
 
 =============future ideas================
-1. like weather app 
-2. private accounts 
-
-
-
-
-
-
-
-
-
-
-
-
+1. like weather app
+2. private accounts
