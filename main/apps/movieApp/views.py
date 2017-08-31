@@ -60,8 +60,19 @@ def makeReview(request, id):
     if 'user' not in request.session:
         return redirect('/')
     if request.method =="POST":
-        movie = services.get_movie(id)
-        print movie
-        review = Review.objects.create(user_id = User.objects.get(id = request.session['user']), content = request.POST['content'], score = request.POST['score'], api_Movie_code = id, poster_path = movie['movie_info'].poster_path, movie_title = movie['movie_info'].title,
-        backdrop_path = movie['movie_info'].backdrop_path)
+        movie = services.get_movie(id)['movie_info']
+        # print movie['poster_path']
+
+
+        review = Review.objects.create(
+            user_id = User.objects.get(id = request.session['user']),
+            content = request.POST['content'],
+            score = request.POST['score'],
+            api_Movie_code = id,
+            poster_path = movie["poster_path"],
+            movie_title = movie['title'],
+            backdrop_path = movie['backdrop_path']
+        )
+
+
     return redirect('/movie/' + id)
