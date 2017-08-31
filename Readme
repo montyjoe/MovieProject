@@ -1,12 +1,16 @@
 
 *********** Installs *************
 Requests
+**********************************
+Accounts
 
-SPOOOODER MAN
+
+
 =============schedule================
 30.
 31.
-sept
+
+sept-----
 1.
 2.
 3.
@@ -22,7 +26,11 @@ sept
 
 =============thing that are needed to be added still ================
 
-- need to fix the profile 
+- need to fix the profile
+    -followers and following
+    -info should be hidden
+    -recent reviews
+
 - form validations - validations are in, just need to be made prettier. no bcrypt yet
 - notifications (jordan)
 - movie list (Ryan)

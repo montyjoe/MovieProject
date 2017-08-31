@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from . import services
 from .models import Watchlist
 from ..User_app.models import User
-from ..homeApp.models import Review
+from ..movieApp.models import Review
+
 
 # Create your views here.
 def movie_page(request, id): # this renders the selected individual movie page
@@ -62,17 +63,11 @@ def makeReview(request, id):
     if request.method =="POST":
         movie = services.get_movie(id)['movie_info']
         # print movie['poster_path']
-
-
-        review = Review.objects.create(
-            user_id = User.objects.get(id = request.session['user']),
-            content = request.POST['content'],
-            score = request.POST['score'],
-            api_Movie_code = id,
-            poster_path = movie["poster_path"],
-            movie_title = movie['title'],
-            backdrop_path = movie['backdrop_path']
-        )
-
-
+        data = {
+            "id": id,
+            "content": request.POST['content'],
+            "score": request.POST['score'],
+            "user_id": request.session['user']
+        }
+        Review.add_review(data)
     return redirect('/movie/' + id)
