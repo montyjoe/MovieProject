@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import User, Profile, Movie, Friend
-from ..movieApp.models import Watchlist
+from .models import User, Profile, Friend
+from ..movieApp.models import Watchlist, Movie
 
 
 """
@@ -110,26 +110,6 @@ def change_friends(request, operation, pk):
         Friend.lose_friend(User.objects.get(id=request.session['user']), new_friend)
 
     return redirect('/')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

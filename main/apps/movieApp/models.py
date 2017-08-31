@@ -32,3 +32,7 @@ class Watchlist(models.Model): #creates a watchlist
     @classmethod
     def remove(self, data):
         return
+
+#this is the Model for our movies ==================
+class Movie(models.Model):
+    api_Movie_code = models.CharField(max_length=100)

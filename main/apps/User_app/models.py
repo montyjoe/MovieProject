@@ -95,10 +95,6 @@ class Profile(models.Model):
     country = models.CharField(max_length=100)
     user_id = models.ForeignKey(User, related_name='profile')
 
-#this is the Model for our movies ==================
-class Movie(models.Model):
-    api_Movie_code = models.CharField(max_length=100)
-
 # establishes a friendship so user can see friends list =========
 
 class Friend(models.Model):
