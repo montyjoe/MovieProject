@@ -16,7 +16,7 @@ def movie_page(request, id): # this renders the selected individual movie page
 
 
     movie = services.get_movie(id)
-    reviews = Review.objects.filter(movie_id=id)
+    reviews = Review.objects.filter(api_Movie_code=id)
     context = { #<-- info that goes to template
         'movie': movie['movie_info'],
         'cast': movie['cast_info'],
@@ -60,5 +60,8 @@ def makeReview(request, id):
     if 'user' not in request.session:
         return redirect('/')
     if request.method =="POST":
-        review = Review.objects.create(user_id = User.objects.get(id = request.session['user']), content = request.POST['content'], score = request.POST['score'], movie_id = (services.get_movie(id)))
+        movie = services.get_movie(id)
+        print movie
+        review = Review.objects.create(user_id = User.objects.get(id = request.session['user']), content = request.POST['content'], score = request.POST['score'], api_Movie_code = id, poster_path = movie['movie_info'].poster_path, movie_title = movie['movie_info'].title,
+        backdrop_path = movie['movie_info'].backdrop_path)
     return redirect('/movie/' + id)

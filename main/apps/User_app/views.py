@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import User, Profile, Movie, Friend
-from ..movieApp.models import Watchlist
+from .models import User, Profile, Friend
+from ..movieApp.models import Watchlist, Movie
 
 
 """
