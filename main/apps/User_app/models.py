@@ -119,3 +119,18 @@ class Friend(models.Model):
         current_user=current_user
         )
         friend.users.remove(new_friend)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# end
