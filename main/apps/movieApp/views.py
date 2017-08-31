@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from . import services
 from .models import Watchlist
 from ..User_app.models import User
+from ..homeApp.models import Review
 
 # Create your views here.
 def movie_page(request, id): # this renders the selected individual movie page
@@ -15,9 +16,11 @@ def movie_page(request, id): # this renders the selected individual movie page
 
 
     movie = services.get_movie(id)
+    reviews = Review.objects.filter(movie_id=id)
     context = { #<-- info that goes to template
         'movie': movie['movie_info'],
         'cast': movie['cast_info'],
+        'reviews' : reviews,
         'in_list': in_list
     }
     return render(request, 'movieApp/movie_page.html', context)
@@ -51,3 +54,11 @@ def delete_from_watchlist(request, id):
     delete_me = Watchlist.objects.get(id=id)
     delete_me.delete()
     return redirect("/profile")
+
+
+def makeReview(request, id):
+    if 'user' not in request.session:
+        return redirect('/')
+    if request.method =="POST":
+        review = Review.objects.create(user_id = User.objects.get(id = request.session['user']), content = request.POST['content'], score = request.POST['score'], movie_id = (services.get_movie(id)))
+    return redirect('/movie/' + id)
