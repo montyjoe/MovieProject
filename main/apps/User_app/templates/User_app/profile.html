@@ -61,6 +61,16 @@
       </div>
       {% endfor %}
 
+      <h2>Followers</h2>
+      {% for follower in followers %}
+      <div class="">
+        <img src="{% static "User_app/blankUser.png" %}" width="50" height="50"/>
+        <a href="/user/{{ follower.id }}">{{follower.users}}</a>
+
+      </div>
+      {% endfor %}
+
+
     </div>
     <div class="watch-list">
       <h2>Watchlist</h2>

@@ -56,17 +56,16 @@ class Review(models.Model):
     @classmethod
     def add_review(self, data):
         movie = services.get_movie(data['id'])['movie_info']
-
         review = Review.objects.create(
             user_id = User.objects.get(id = data['user_id']),
             content = data['content'],
             score = data['score'],
-            api_Movie_code = id,
+            api_Movie_code = data['id'],
             poster_path = movie["poster_path"],
             movie_title = movie['title'],
             backdrop_path = movie['backdrop_path']
         )
-        return
+        return review
 
 
 

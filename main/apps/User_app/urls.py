@@ -13,7 +13,7 @@ urlpatterns = [
     url(r'^log_user_in$', views.log_user_in),
     url(r'^createProfile$', views.createProfile),
     url(r'^logout$', views.logout),
-    url(r'^connect/(?P<operation>.+)/(?P<pk>\d+)/$', views.change_friends)
+    url(r'^connect/(?P<operation>.+)/(?P<id>\d+)/$', views.change_friends)
 
 
 ]

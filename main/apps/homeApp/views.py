@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, HttpResponse
 from . import services
 from ..User_app.models import User, Profile, Friend
-from ..movieApp.models import Movie
+from ..movieApp.models import Movie, Review
 from ..User_app import views
 from django.views.generic.edit import FormView
 import json
@@ -30,6 +30,34 @@ def index(request):
         status = "You are NOT logged in"
         users = User.objects.all().order_by('-created_at')
         return render(request, 'homeApp/index.html', {'status': status, 'result': result, 'users': users})
+
+
+
+
+def feed(request):
+    if "user" not in request.session:
+        return redirect('/')
+
+    user = User.objects.get(id=request.session['user'])
+    friends = Friend.objects.get(current_user=user)
+    feed_list = []
+    for friend in friends.users.all():
+        movie_reviews = Review.objects.filter(user_id=friend.id)
+        # print movie_reviews
+        for review in movie_reviews:
+            feed_list.append(review)
+
+
+
+    context = {
+        "friends": friends,
+        "feed": feed_list,
+    }
+
+    return render(request, "homeApp/newsfeed.html", context)
+
+
+
 
 
 

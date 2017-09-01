@@ -18,6 +18,7 @@ def movie_page(request, id): # this renders the selected individual movie page
 
     movie = services.get_movie(id)
     reviews = Review.objects.filter(api_Movie_code=id)
+    print reviews
     context = { #<-- info that goes to template
         'movie': movie['movie_info'],
         'cast': movie['cast_info'],
@@ -25,6 +26,13 @@ def movie_page(request, id): # this renders the selected individual movie page
         'in_list': in_list
     }
     return render(request, 'movieApp/movie_page.html', context)
+
+
+
+
+
+
+
 
 def cast_page(request, id): # this render the info page for the individual actor
     person_info = services.get_person(id)
@@ -60,8 +68,7 @@ def delete_from_watchlist(request, id):
 def makeReview(request, id):
     if 'user' not in request.session:
         return redirect('/')
-    if request.method =="POST":
-        movie = services.get_movie(id)['movie_info']
+    if request.method == "POST":
         # print movie['poster_path']
         data = {
             "id": id,
