@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import User, Profile, Friend
-from ..movieApp.models import Watchlist, Movie
+from ..movieApp.models import Watchlist, Movie, Review
 
 
 """
@@ -24,10 +24,17 @@ def profile(request):
         return redirect('/login')
     username = request.session['name']
     profile = Profile.objects.filter(user_id = User.objects.get(id = request.session['user']))
+    reviews = Review.objects.filter(user_id = User.objects.get(id = request.session['user']))
+    friend, created = Friend.objects.get_or_create(current_user=User.objects.get(id = request.session['user']))
+    following = friend.users.all()
+    followers = Friend.objects.filter(users= User.objects.filter(id=request.session['user']))
     context = {
+    'followers' : followers,
+    'following' : following,
     'profile' : profile,
     'username' : username,
-    'watchlist': Watchlist.objects.filter(user=request.session["user"])
+    'watchlist': Watchlist.objects.filter(user=request.session["user"]),
+    'reviews' : reviews,
     }
     print request.session['user']
     return render(request, "User_app/profile.html", context)
@@ -89,11 +96,20 @@ def createProfile(request):
 def user_page(request, id):
     users = User.objects.filter(id = id)
     try:
+        followers = Friend.users.filter(users=request.session['user'])
+    except:
+        followers = 'No followers'
+    print followers
+    try:
+        following = Friend.objects.filter(current_user=User.objects.get(id = request.session['user']))
+    except:
+        following = "not a friend"
+    try:
         profile = Profile.objects.get(user_id=id)
     except:
         profile = "This user has not created a profile yet"
 
-    return render(request, 'User_app/user.html', { 'users': users, 'profile': profile })
+    return render(request, 'User_app/user.html', { 'users': users, 'profile': profile, 'following' : following, 'followers' : followers })
 
 def logout(request):
     request.session.clear()
@@ -102,8 +118,8 @@ def logout(request):
 
 # function that calls on the Friend Methods to add or remove a friend
 
-def change_friends(request, operation, pk):
-    new_friend = User.objects.get(id=pk)
+def change_friends(request, operation, id):
+    new_friend = User.objects.get(id=id)
     if operation == 'add':
         Friend.add_friend(User.objects.get(id=request.session['user']), new_friend)
     elif operation == 'remove':
