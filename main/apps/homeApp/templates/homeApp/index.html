@@ -65,8 +65,8 @@
           <a class='lbtn' href="/profile">Profile</a>
           <div id="actions_menu" class="file_menu">
             <div><a href="/profile">View</a></div>
-            <div><a href="/">Edit</a></div>
-            <div><a href="/">Following</a></div>
+            <!-- <div><a href="/">Edit</a></div>
+            <div><a href="/">Following</a></div> -->
             <div><a href="/logout">Logout</a></div>
 
           </div>
@@ -114,7 +114,7 @@
     {% if status == 'You are logged in' %}
     <div class="friends">
 
-    <h2>Friends</h2>
+    <h2>Following</h2>
     {% for friend in friends %}
     <div class="friend">
       <img src="{% static "User_app/blankUser.png" %}" width="50" height="50"/>
