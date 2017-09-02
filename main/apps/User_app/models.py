@@ -91,7 +91,7 @@ class User(models.Model):
     def Fullname_toString(self, user): #<-- must put the user object in
         f = user.first_name.title()
         l = user.last_name.title()
-        return f + " " + l
+        return str(f + " " + l)
 
 
 
