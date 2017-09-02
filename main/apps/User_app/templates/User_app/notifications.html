@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>Here is where the notifications will go</h1>
+    {% for notification in notifications%}
+
+      <p>{{ notification.message }}</p>
+      
+
+    {% endfor %}
+
+  </body>
+</html>

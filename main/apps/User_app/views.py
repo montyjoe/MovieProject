@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import User, Profile, Friend
+from .models import User, Profile, Friend, Notification
 from ..movieApp.models import Watchlist, Movie, Review
 
 
@@ -45,7 +45,20 @@ def profile(request):
 
 
 
+def notification_page(request):
+    user_id = request.session['user']
+    user = User.objects.get(id=user_id)
+    User.Fullname_toString(user)
+    notifications = Notification.objects.filter(user=user).order_by('created_at')
+    context = {
+        "notifications": notifications,
+    }
 
+    for notification in notifications:
+        if notification.viewed == False:
+            Notification.was_viewed(notification)
+
+    return render(request, "User_app/notifications.html", context)
 
 
 
