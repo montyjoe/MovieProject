@@ -5,6 +5,7 @@ from ..movieApp.models import Movie, Review
 from ..User_app import views
 from django.views.generic.edit import FormView
 import json
+import requests
 
 
 
@@ -66,6 +67,29 @@ def testing(request):
     return redirect('/')
 
 
+def search_movies(request):
+    if request.is_ajax():
+        q=request.GET.get('term', '')
+        movies = 'https://api.themoviedb.org/3/search/multi?api_key=286abf6056d0a1338f772d1b7202e728&language=en-US&query=' + q + '&page=1&include_adult=false'
+        json_data = requests.get(movies).json()
+        # print json_data
+        results = json_data['results']
+        # print results
+        # print '***************'
+        movArray = []
+        for movie in results:
+            print movie['id']
+            movie_json = {}
+            movie_json['id'] = movie['id']
+            movie_json['label'] = movie['title'] | movie['name']
+            movie_json['value'] = movie['title']
+            movArray.append(movie_json)
+        data = json.dumps(movArray)
+    else:
+        data = 'fail'
+    mimetype = 'application/json'
+    print data
+    return HttpResponse(data, mimetype)
 
 
 def get_places(request):
