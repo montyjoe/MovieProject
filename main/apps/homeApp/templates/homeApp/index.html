@@ -37,11 +37,37 @@
       var selectedObj = ui.item;
       window.location = "/user/" + selectedObj.id;
     }
+
+
+
+    $(function() {
+      $("#movies").autocomplete({
+        source: "/api/search_movies",
+        select: function (event, ui) { //item selected
+          AutoCompleteSelectHandler(event, ui)
+        },
+        minLength: 2,
+      });
+    });
+
+    function AutoCompleteSelectHandler(event, ui)
+    {
+      var selectedObj = ui.item;
+      window.location = "/user/" + selectedObj.id;
+    }
     </script>
   </head>
 
 
   <body>
+    <div class="ui-widget">
+      <form class="" action="/search" method="post">
+        {% csrf_token %}
+      <label for="places">Search Movies, TV Shows: </label>
+      <input name="person" id="movies">
+      <input type="submit" name="search" value="Search">
+    </form>
+    </div>
 
     <div class="header">
       <h1>Two Thumbs Up</h1>
