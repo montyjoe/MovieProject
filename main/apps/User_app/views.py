@@ -3,6 +3,7 @@ from .models import User, Profile, Friend
 from ..movieApp.models import Watchlist, Movie, Review
 
 
+
 """
 things that need to be added?
 1. validation messages
@@ -28,6 +29,9 @@ def profile(request):
     friend, created = Friend.objects.get_or_create(current_user=User.objects.get(id = request.session['user']))
     following = friend.users.all()
     followers = Friend.objects.filter(users= User.objects.filter(id=request.session['user']))
+
+
+
     context = {
     'followers' : followers,
     'following' : following,
@@ -38,6 +42,14 @@ def profile(request):
     }
     print request.session['user']
     return render(request, "User_app/profile.html", context)
+
+
+
+
+
+
+
+
 
 # =================================================================
 # POST request's
