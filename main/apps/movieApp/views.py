@@ -3,6 +3,7 @@ from . import services
 from .models import Watchlist
 from ..User_app.models import User
 from ..movieApp.models import Review
+from ..homeApp import services
 
 
 # Create your views here.
@@ -27,7 +28,21 @@ def movie_page(request, id): # this renders the selected individual movie page
     }
     return render(request, 'movieApp/movie_page.html', context)
 
+def show_page(request, id):
+    show = services.get_show(id)
+    return render(request, 'movieApp/tv_page.html', {'show': show})
 
+def movie_home(request):
+    result = services.get_discover()
+    return render(request, 'movieApp/movies_home.html', {'result' : result})
+
+def tv_home(request):
+    shows = services.popular_tv()
+    return render(request, 'movieApp/tv_home.html', {'shows': shows})
+
+def actor_home(request):
+    actors = services.popular_actors()
+    return render(request, 'movieApp/actors_home.html', {'actors': actors})
 
 
 

@@ -5,6 +5,10 @@
     <title>newsfeed</title>
   </head>
   <body>
+    <a href="/">Home</a>
+    {% if request.session.user %}
+    <a href="/logout">Logout</a>
+    {% endif %}
     <h1>Review Feed</h1>
 
     {% for review in feed %}

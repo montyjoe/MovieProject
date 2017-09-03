@@ -60,13 +60,13 @@ def profile(request):
     following = friend.users.all()
     followers = Friend.objects.filter(users= User.objects.filter(id=request.session['user']))
     profile_picture = ""
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> ccef8de1a80fa0b6924fc0de39a42e8f6e9f144e
     for stuff in profile:
         profile_picture = stuff.picture
-
-
-
     context = {
     'followers' : followers,
     'following' : following,
@@ -162,7 +162,9 @@ def user_page(request, id):
     except:
         profile = "This user has not created a profile yet"
 
-    return render(request, 'User_app/user.html', { 'users': users, 'profile': profile, 'following' : following, 'followers' : followers })
+    profile_picture = profile.picture
+
+    return render(request, 'User_app/user.html', { 'users': users, 'profile': profile, 'following' : following, 'followers' : followers, 'profile_picture' : profile_picture })
 
 def logout(request):
     request.session.clear()
