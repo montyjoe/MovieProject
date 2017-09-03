@@ -12,7 +12,8 @@
     {% endif %}
     <div class="userPage">
       {% for user in users %}
-      <img src="{% static "User_app/blankUser.png" %}" width="150" height="150"/>
+      <img src="{{profile_picture}}" alt="" width="150">
+      <!-- <img src="{% static "User_app/blankUser.png" %}" width="150" height="150"/> -->
       <h1>{{ user.first_name}}'s Profile</h1>
 
 
