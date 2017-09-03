@@ -22,8 +22,11 @@
     <a href="/logout">Logout</a>
     <div class="general">
       <h1>My Profile</h1>
-      <img src="{% static "User_app/blankUser.png" %}" width="150" height="150"/>
-      <img src="{{profile.picture}}" alt="">
+      <!-- <img src="{% static "User_app/blankUser.png" %}" width="150" height="150"/> -->
+      <img src="{{profile_picture}}" alt="">
+      <p>------------------------</p>
+      <p>------------------------</p>
+
       <!-- <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <input type="file" name="myfile">
