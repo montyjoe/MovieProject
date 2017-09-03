@@ -19,7 +19,7 @@ def movie_page(request, id): # this renders the selected individual movie page
 
 
     movie = movie_services.get_movie(id)
-    reviews = Review.objects.filter(api_Movie_code=id)
+    reviews = MovieReview.objects.filter(api_code=id)
     print reviews
     context = { #<-- info that goes to template
         'movie': movie['movie_info'],

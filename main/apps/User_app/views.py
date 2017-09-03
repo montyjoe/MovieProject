@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import User, Profile, Friend, Notification
-from ..movieApp.models import Watchlist
+from ..movieApp.models import Watchlist, UserReview
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 
@@ -107,10 +107,12 @@ def register_account(request): #this function creates the account
             "password": request.POST['password']
         }
         result = User.objects.register(account_info)
+        user_id = result['user'].id
         if result['errors'] == None:
             request.session['name'] = result['user'].first_name
-            request.session['user'] = result['user'].id
+            request.session['user'] = user_id
             request.session['action'] = "registered"
+            UserReview.create_new(user_id)
             return redirect('/')
         else:
             print result['errors']
