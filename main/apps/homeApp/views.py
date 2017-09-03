@@ -162,3 +162,9 @@ def search(request):
 #             data = json.dumps(results)
 #             mimetype = 'application/json'
 #             return HttpResponse(data, mimetype)
+
+
+
+
+def mockup(request):
+    return render(request, 'homeApp/main-mockup.html')

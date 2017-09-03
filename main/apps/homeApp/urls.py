@@ -9,7 +9,7 @@ urlpatterns = [
     url(r'^search', views.search),
     url(r'^reviewfeed', views.feed),
     url(r'^api/search_movies', views.search_movies, name='search_movies'),
-    # url(r'^/m$', views.mockup),
+    url(r'^m$', views.mockup),
     # url(r'^autocomplete/$', AutoCompleteView.as_view(), name='autocomplete'),
 
 ]
