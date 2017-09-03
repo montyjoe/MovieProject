@@ -51,7 +51,7 @@ def actor_home(request):
 
 
 def cast_page(request, id): # this render the info page for the individual actor
-    person_info = services.get_person(id)
+    person_info = movie_services.get_person(id)
     person = {
         'details': person_info['details'],
         'credits': person_info['credits']
