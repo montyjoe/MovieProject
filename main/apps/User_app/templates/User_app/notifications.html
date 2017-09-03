@@ -5,11 +5,15 @@
     <title></title>
   </head>
   <body>
+    <a href="/">Home</a>
+    {% if request.session.user %}
+    <a href="/logout">Logout</a>
+    {% endif %}
     <h1>Here is where the notifications will go</h1>
     {% for notification in notifications%}
 
       <p>{{ notification.message }}</p>
-      
+
 
     {% endfor %}
 
