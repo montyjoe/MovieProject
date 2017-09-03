@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from .models import User, Profile, Friend, Notification
 from ..movieApp.models import Watchlist, Movie, Review
+from django.conf import settings
+from django.core.files.storage import FileSystemStorage
 
 
 
@@ -19,6 +21,33 @@ def login_page(request): #renders the login page template
 
 def register_page(request): #renders the register page template
     return render(request, 'User_app/register_page.html')
+
+def createProfile(request):
+    if request.method == 'POST' and request.FILES['myfile']:
+        myfile = request.FILES['myfile']
+        fs = FileSystemStorage()
+        filename = fs.save(myfile.name, myfile)
+        uploaded_file_url = fs.url(filename)
+        profile = Profile.objects.create(
+        birthday = request.POST['birthday'],
+        hometown = request.POST['hometown'],
+        country = request.POST['country'],
+        user_id = User.objects.get(id = request.session['user']),
+        picture = uploaded_file_url
+        )
+        return redirect('/profile')
+
+# def simple_upload(request):
+#     if request.method == 'POST' and request.FILES['myfile']:
+#         myfile = request.FILES['myfile']
+#         fs = FileSystemStorage()
+#         filename = fs.save(myfile.name, myfile)
+#         uploaded_file_url = fs.url(filename)
+#         return render(request, 'User_app/profile.html', {
+#             'uploaded_file_url': uploaded_file_url
+#         })
+#     return render(request, 'User_app/profile.html')
+
 
 def profile(request):
     if 'user' not in request.session:
@@ -106,15 +135,7 @@ def log_user_in(request): # this is to the log the user in
             return redirect('/login')
 
 
-def createProfile(request):
-    if request.method == 'POST':
-        profile = Profile.objects.create(
-            birthday = request.POST['birthday'],
-            hometown = request.POST['hometown'],
-            country = request.POST['country'],
-            user_id = User.objects.get(id = request.session['user'])
-        )
-    return redirect('/profile')
+
 
 # renders the specific user page, other than the current user
 

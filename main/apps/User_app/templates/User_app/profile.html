@@ -23,6 +23,12 @@
     <div class="general">
       <h1>My Profile</h1>
       <img src="{% static "User_app/blankUser.png" %}" width="150" height="150"/>
+      <img src="{{profile.picture}}" alt="">
+      <!-- <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="myfile">
+        <button type="submit">Upload</button>
+      </form> -->
 
       {% if profile %}
       {% for item in profile %}
@@ -36,8 +42,10 @@
       {% else %}
       <input type="button" name="answer" value="Edit Profile" onclick="showDiv()" />
       <div id="profileDiv" style="display:none;">
-        <form class="" action="/createProfile" method="post">
+        <form class="" action="/createProfile" enctype="multipart/form-data" method="post">
           {% csrf_token %}
+          <input type="file" name="myfile">
+          <!-- <button type="submit">Upload</button> -->
           Birthday:
           <input type="date" name="birthday" value="">
           Hometown:
@@ -48,6 +56,9 @@
         </form>
 
       </div>
+      {% endif %}
+      {% if uploaded_file_url %}
+        <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
       {% endif %}
 
     </div>
