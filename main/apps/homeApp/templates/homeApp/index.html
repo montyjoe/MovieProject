@@ -60,6 +60,7 @@
 
 
   <body>
+<<<<<<< HEAD
     <div class="ui-widget">
       <form class="" action="/search" method="post">
         {% csrf_token %}
@@ -68,6 +69,8 @@
       <input type="submit" name="search" value="Search">
     </form>
     </div>
+=======
+>>>>>>> upstream/master
 
     <div class="header">
       <h1>Two Thumbs Up</h1>
@@ -83,6 +86,14 @@
       </form>
       </div>
 
+      <div class="ui-widget">
+        <form class="" action="/search" method="post">
+          {% csrf_token %}
+          <label for="places">Search Movies, TV Shows: </label>
+          <input name="person" id="movies">
+          <input type="submit" name="search" value="Search">
+        </form>
+      </div>
 
 
       {% if request.session.action == "logged in" or request.session.action == "registered" %}
@@ -99,7 +110,6 @@
         </div>
       </div>
       <a href="/">Home</a>
-      <a href="#">Notifications</a>
       <a href="#">Movies</a>
       <a href="#">TV</a>
       <a href="#">Actors</a>
@@ -152,6 +162,10 @@
   </div>
   {% endif %}
 
+
+  <div class="notifications">
+    <a href="/user/notifications">Notifications</a>
+  </div>
   <div class="review-feed">
     <h2>Review Feed</h2>
     <a href="/reviewfeed">Click here for feed</a>

@@ -87,6 +87,17 @@ class User(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     objects = UserManager()
 
+    @classmethod
+    def Fullname_toString(self, user): #<-- must put the user object in
+        f = user.first_name.title()
+        l = user.last_name.title()
+        return str(f + " " + l)
+
+
+
+
+
+
 # this is the model for the profile thats attached to a user =======
 class Profile(models.Model):
     picture = models.ImageField(upload_to='documents/', blank=True)
@@ -111,6 +122,8 @@ class Friend(models.Model):
         current_user=current_user
         )
         friend.users.add(new_friend)
+        print "friend added"
+        Notification.add_friend_notification(new_friend.id, current_user.id)
 
     #  method for removing friends =======
 
@@ -123,12 +136,37 @@ class Friend(models.Model):
 
 
 
+class Notification(models.Model):
+    user = models.ForeignKey(User, null=True)
+    message = models.CharField(max_length=100, default='null')
+    category = models.CharField(max_length=50, default='null')
+    viewed = models.BooleanField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 
+    @classmethod
+    def add_friend_notification(self, user_id, follower_id):
+        user = User.objects.get(id=user_id)
+        follower = User.objects.get(id=follower_id)
+
+        full_name = User.Fullname_toString(follower)
+        message = full_name + " " + "has followed you"
 
 
+        Notification.objects.create(
+            user = user,
+            message = message,
+            category = follower,
+            viewed = False,
+        )
+        print 'notification created '
 
 
+    @classmethod
+    def was_viewed(self, notification):
+        notification.viewed = True
+        notification.save()
 
 
 

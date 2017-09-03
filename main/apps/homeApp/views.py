@@ -76,13 +76,20 @@ def search_movies(request):
         # print json_data
         results = json_data['results']
         # print results
-        # print '***************'
+        print '***************'
         movArray = []
         for movie in results:
-            print movie['id']
+            # print movie['id']
             movie_json = {}
             movie_json['id'] = movie['id']
+<<<<<<< HEAD
             movie_json['label'] = movie['title']
+=======
+            if "title" in movie:
+                movie_json['label'] = movie['title']
+            else:
+                movie_json['label'] = movie['name']
+>>>>>>> upstream/master
             movie_json['value'] = movie['title']
             movArray.append(movie_json)
         data = json.dumps(movArray)

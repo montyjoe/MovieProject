@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
-from .models import User, Profile, Friend
+from .models import User, Profile, Friend, Notification
 from ..movieApp.models import Watchlist, Movie, Review
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
+
 
 
 """
@@ -57,6 +58,9 @@ def profile(request):
     friend, created = Friend.objects.get_or_create(current_user=User.objects.get(id = request.session['user']))
     following = friend.users.all()
     followers = Friend.objects.filter(users= User.objects.filter(id=request.session['user']))
+
+
+
     context = {
     'followers' : followers,
     'following' : following,
@@ -67,6 +71,27 @@ def profile(request):
     }
     print request.session['user']
     return render(request, "User_app/profile.html", context)
+
+
+
+def notification_page(request):
+    user_id = request.session['user']
+    user = User.objects.get(id=user_id)
+    User.Fullname_toString(user)
+    notifications = Notification.objects.filter(user=user).order_by('created_at')
+    context = {
+        "notifications": notifications,
+    }
+
+    for notification in notifications:
+        if notification.viewed == False:
+            Notification.was_viewed(notification)
+
+    return render(request, "User_app/notifications.html", context)
+
+
+
+
 
 # =================================================================
 # POST request's
