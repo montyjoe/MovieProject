@@ -60,7 +60,9 @@ def profile(request):
     following = friend.users.all()
     followers = Friend.objects.filter(users= User.objects.filter(id=request.session['user']))
     profile_picture = ""
-    for stuff in profile: 
+
+
+    for stuff in profile:
         profile_picture = stuff.picture
 
 
