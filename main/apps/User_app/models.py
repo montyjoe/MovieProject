@@ -103,7 +103,6 @@ class Profile(models.Model):
     picture = models.ImageField(upload_to='documents/', blank=True)
     email = models.CharField(max_length=100, default='null')
     birthday = models.DateField()
-    hometown = models.CharField(max_length=100)
     country = models.CharField(max_length=100)
     user_id = models.ForeignKey(User, related_name='profile')
 

@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect
 from . import movie_services
 from .models import Watchlist
 from ..User_app.models import User
-from ..movieApp.models import Review
-from ..homeApp import services
+from ..movieApp.models import MovieReview, TVReview, EpisodeReview, UserReview
+# from ..homeApp import services
+
 
 
 # Create your views here.
@@ -17,8 +18,8 @@ def movie_page(request, id): # this renders the selected individual movie page
                 in_list = True
 
 
-    movie = services.get_movie(id)
-    reviews = Review.objects.filter(api_Movie_code=id)
+    movie = movie_services.get_movie(id)
+    reviews = MovieReview.objects.filter(api_code=id)
     print reviews
     context = { #<-- info that goes to template
         'movie': movie['movie_info'],
@@ -50,7 +51,7 @@ def actor_home(request):
 
 
 def cast_page(request, id): # this render the info page for the individual actor
-    person_info = services.get_person(id)
+    person_info = movie_services.get_person(id)
     person = {
         'details': person_info['details'],
         'credits': person_info['credits']
@@ -89,7 +90,8 @@ def makeReview(request, id):
             "id": id,
             "content": request.POST['content'],
             "score": request.POST['score'],
-            "user_id": request.session['user']
         }
-        Review.add_review(data)
+        mr = MovieReview.create_review(data)
+        user_id = request.session['user']
+        UserReview.add_review(mr, "movie", user_id)
     return redirect('/movie/' + id)

@@ -35,15 +35,21 @@ sept-----
     -recent reviews --done
 
 - form validations - validations are in, just need to be made prettier. no bcrypt yet
+
+
 - notifications (Ryan)
-- movie list (Ryan) ---
-- upload images
+- movie list (Ryan)
+- upload images (complete)
 - rotten tomatoes api
-    -add others 
+    -add others
+
 - how to figure out how to do reviews -- Mostly done
           - how much
           - how many thing to input ()
+
+
 - movie search function
+
 - new feed -- done
 
 - icons for things that are not in the in the database (actors movies)
