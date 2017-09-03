@@ -35,6 +35,7 @@ def createProfile(request):
         user_id = User.objects.get(id = request.session['user']),
         picture = uploaded_file_url
         )
+        profile.save()
         return redirect('/profile')
 
 # def simple_upload(request):
@@ -58,6 +59,9 @@ def profile(request):
     friend, created = Friend.objects.get_or_create(current_user=User.objects.get(id = request.session['user']))
     following = friend.users.all()
     followers = Friend.objects.filter(users= User.objects.filter(id=request.session['user']))
+    profile_picture = ""
+    for stuff in profile: 
+        profile_picture = stuff.picture
 
 
 
@@ -68,6 +72,7 @@ def profile(request):
     'username' : username,
     'watchlist': Watchlist.objects.filter(user=request.session["user"]),
     'reviews' : reviews,
+    'profile_picture': profile_picture,
     }
     print request.session['user']
     return render(request, "User_app/profile.html", context)
