@@ -35,16 +35,11 @@ class Watchlist(models.Model): #creates a watchlist
         return
 
 #this is the Model for our movies ==================
-class Movie(models.Model):
-    api_Movie_code = models.CharField(max_length=100)
 
 
-
-
-class Review(models.Model):
-    user_id = models.ForeignKey(User, related_name='users')
-    api_Movie_code = models.CharField(max_length=100)
-    movie_title = models.CharField(max_length=50)
+class MovieReview(models.Model):
+    api_code = models.CharField(max_length=100)
+    title = models.CharField(max_length=50)
     poster_path = models.CharField(max_length=100)
     backdrop_path = models.CharField(max_length=100)
     content = models.CharField(max_length=140)
@@ -52,21 +47,96 @@ class Review(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-
     @classmethod
-    def add_review(self, data):
+    def create_review(self, data):
         movie = services.get_movie(data['id'])['movie_info']
-        review = Review.objects.create(
-            user_id = User.objects.get(id = data['user_id']),
+        movie_review = MovieReview.objects.create(
+            api_code = data['id'],
             content = data['content'],
             score = data['score'],
-            api_Movie_code = data['id'],
+            title = movie['title'],
             poster_path = movie["poster_path"],
-            movie_title = movie['title'],
             backdrop_path = movie['backdrop_path']
         )
-        return review
+        return movie_review
 
+
+class TVReview(models.Model):
+    api_code = models.CharField(max_length=100)
+    title = models.CharField(max_length=50)
+    poster_path = models.CharField(max_length=100)
+    backdrop_path = models.CharField(max_length=100)
+    content = models.CharField(max_length=140)
+    score = models.PositiveIntegerField(null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+class EpisodeReview(models.Model):
+    api_code = models.CharField(max_length=100)
+    series_title = models.CharField(max_length=50)
+    episode_title = models.CharField(max_length=50)
+    poster_path = models.CharField(max_length=100)
+    backdrop_path = models.CharField(max_length=100)
+    content = models.CharField(max_length=140)
+    score = models.PositiveIntegerField(null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+class UserReview(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='users')
+    movie_review = models.ManyToManyField(MovieReview, related_name='m_review_user')
+    tv_review = models.ManyToManyField(TVReview, related_name='m_review_user')
+    episode_review = models.ManyToManyField(EpisodeReview, related_name='m_review_user')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    @classmethod
+    def create_new(self, id):
+        user = User.objects.get(id=id)
+        UserReview.objects.create(
+            user = user
+        )
+        return
+    @classmethod
+    def add_review(self, review, _type, user_id):
+        user = User.objects.get(id=user_id)
+        ur = UserReview.objects.get(user=user)
+        if _type == "movie":
+            ur.movie_review.add(review)
+            ur.save()
+        if _type == "tv":
+            ur.tv_review.add(review)
+            ur.save()
+        if _type == "episode":
+            ur.episode_review.add(review)
+            ur.save()
+        return
+# class Review(models.Model):
+#     user_id = models.ForeignKey(User, related_name='users')
+#     api_Movie_code = models.CharField(max_length=100)
+#     movie_title = models.CharField(max_length=50)
+#     poster_path = models.CharField(max_length=100)
+#     backdrop_path = models.CharField(max_length=100)
+#     content = models.CharField(max_length=140)
+#     score = models.PositiveIntegerField(null=True)
+#     created_at = models.DateTimeField(auto_now_add=True)
+#     updated_at = models.DateTimeField(auto_now=True)
+#
+#
+#     @classmethod
+#     def add_review(self, data):
+#         movie = services.get_movie(data['id'])['movie_info']
+#         review = Review.objects.create(
+#             user_id = User.objects.get(id = data['user_id']),
+#             content = data['content'],
+#             score = data['score'],
+#             api_Movie_code = data['id'],
+#             poster_path = movie["poster_path"],
+#             movie_title = movie['title'],
+#             backdrop_path = movie['backdrop_path']
+#         )
+#         return review
+#
 
 
 

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import User, Profile, Friend, Notification
-from ..movieApp.models import Watchlist, Movie, Review
+from ..movieApp.models import Watchlist
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 

@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
-from . import services
+from . import movie_services
 from .models import Watchlist
 from ..User_app.models import User
-from ..movieApp.models import Review
-from ..homeApp import services
+from ..movieApp.models import MovieReview, TVReview, EpisodeReview, UserReview
+# from ..homeApp import services
+
 
 
 # Create your views here.
@@ -17,7 +18,7 @@ def movie_page(request, id): # this renders the selected individual movie page
                 in_list = True
 
 
-    movie = services.get_movie(id)
+    movie = movie_services.get_movie(id)
     reviews = Review.objects.filter(api_Movie_code=id)
     print reviews
     context = { #<-- info that goes to template
@@ -29,7 +30,7 @@ def movie_page(request, id): # this renders the selected individual movie page
     return render(request, 'movieApp/movie_page.html', context)
 
 def show_page(request, id):
-    show = services.get_show(id)
+    show = movie_services.get_show(id)
     return render(request, 'movieApp/tv_page.html', {'show': show})
 
 def movie_home(request):
@@ -37,11 +38,11 @@ def movie_home(request):
     return render(request, 'movieApp/movies_home.html', {'result' : result})
 
 def tv_home(request):
-    shows = services.popular_tv()
+    shows = movie_services.popular_tv()
     return render(request, 'movieApp/tv_home.html', {'shows': shows})
 
 def actor_home(request):
-    actors = services.popular_actors()
+    actors = movie_services.popular_actors()
     return render(request, 'movieApp/actors_home.html', {'actors': actors})
 
 
@@ -89,7 +90,8 @@ def makeReview(request, id):
             "id": id,
             "content": request.POST['content'],
             "score": request.POST['score'],
-            "user_id": request.session['user']
         }
-        Review.add_review(data)
+        mr = MovieReview.create_review(data)
+        user_id = request.session['user']
+        UserReview.add_review(mr, "movie", user_id)
     return redirect('/movie/' + id)
