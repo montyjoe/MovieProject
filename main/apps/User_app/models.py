@@ -89,6 +89,7 @@ class User(models.Model):
 
 # this is the model for the profile thats attached to a user =======
 class Profile(models.Model):
+    picture = models.ImageField(upload_to='documents/', blank=True)
     email = models.CharField(max_length=100, default='null')
     birthday = models.DateField()
     hometown = models.CharField(max_length=100)
