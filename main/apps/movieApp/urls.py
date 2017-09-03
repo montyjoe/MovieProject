@@ -5,7 +5,11 @@ from . import views
 urlpatterns = [
     url(r'^movie/(?P<id>\d+)$', views.movie_page),
     url(r'^people/(?P<id>\d+)', views.cast_page),
+    url(r'^show/(?P<id>\d+)', views.show_page),
     url(r'^movie/add/watchlist/(?P<id>\d+)$', views.add_to_watchlist),
     url(r'^movie/delete/watchlist/(?P<id>\d+)$', views.delete_from_watchlist),
     url(r'^makeReview/(?P<id>\d+)', views.makeReview),
+    url(r'^movie_home$', views.movie_home),
+    url(r'^tv_home$', views.tv_home),
+    url(r'^actor_home$', views.actor_home),
 ]

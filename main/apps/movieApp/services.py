@@ -7,7 +7,15 @@ YOU MIGHT HAVE TO PIP INSTALL REQUESTS IF YOU DO NOT ALREADY HAVE IT
 api key = 286abf6056d0a1338f772d1b7202e728
 """
 
+def popular_actors(): #this gets the popular actors at from the TMDB api
+    url = 'https://api.themoviedb.org/3/person/popular?api_key=286abf6056d0a1338f772d1b7202e728&language=en-US&page=1'
+    json_data = requests.get(url).json()
+    return json_data['results']
 
+def popular_tv():
+    url = 'https://api.themoviedb.org/3/tv/popular?api_key=286abf6056d0a1338f772d1b7202e728&language=en-US&page=1'
+    json_data = requests.get(url).json()
+    return json_data['results']
 
 def get_movie(id): #this gets the popular movies at from the TMDB api
     # https://api.themoviedb.org/3/movie/{movie_id}?api_key=286abf6056d0a1338f772d1b7202e728&language=en-US
@@ -25,6 +33,12 @@ def get_movie(id): #this gets the popular movies at from the TMDB api
         "cast_info": cast_data
     }
     return movie
+
+def get_show(id):
+
+    tv_url = 'https://api.themoviedb.org/3/tv/' + id + '?api_key=286abf6056d0a1338f772d1b7202e728&language=en-US'
+    tv_data = requests.get(tv_url).json()
+    return tv_data
 
 
 def get_person(id):
