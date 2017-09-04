@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from . import movie_services
+from ..homeApp import services
 from .models import Watchlist
 from ..User_app.models import User
 from ..movieApp.models import MovieReview, TVReview, EpisodeReview, UserReview

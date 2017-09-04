@@ -84,9 +84,9 @@ class EpisodeReview(models.Model):
 
 class UserReview(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='users')
-    movie_review = models.ManyToManyField(MovieReview, related_name='m_review_user')
-    tv_review = models.ManyToManyField(TVReview, related_name='m_review_user')
-    episode_review = models.ManyToManyField(EpisodeReview, related_name='m_review_user')
+    movie_review = models.ManyToManyField(MovieReview, related_name='movies')
+    tv_review = models.ManyToManyField(TVReview, related_name='tvs')
+    episode_review = models.ManyToManyField(EpisodeReview, related_name='episodes')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

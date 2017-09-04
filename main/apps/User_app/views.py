@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import User, Profile, Friend, Notification
-from ..movieApp.models import Watchlist, UserReview
+from ..movieApp.models import Watchlist, UserReview, MovieReview, TVReview, EpisodeReview
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 
@@ -55,7 +55,15 @@ def profile(request):
         return redirect('/login')
     username = request.session['name']
     profile = Profile.objects.filter(user_id = User.objects.get(id = request.session['user']))
-    reviews = Review.objects.filter(user_id = User.objects.get(id = request.session['user']))
+
+
+    user = User.objects.get(id = request.session['user'])
+
+    a = MovieReview.objects.filter(__movies_user_id=user)
+
+
+
+
     friend, created = Friend.objects.get_or_create(current_user=User.objects.get(id = request.session['user']))
     following = friend.users.all()
     followers = Friend.objects.filter(users= User.objects.filter(id=request.session['user']))
@@ -68,10 +76,9 @@ def profile(request):
     'profile' : profile,
     'username' : username,
     'watchlist': Watchlist.objects.filter(user=request.session["user"]),
-    'reviews' : reviews,
+    # 'reviews' : reviews,
     'profile_picture': profile_picture,
     }
-    print request.session['user']
     return render(request, "User_app/profile.html", context)
 
 
