@@ -12,6 +12,11 @@
     {% endif %}
     <h1>{{ show.name }}</h1>
     <img style="width:200px" src="https://image.tmdb.org/t/p/w500{{show.backdrop_path}}" >
+    <ul>
+      {%for season in show.seasons%}
+      <li><a href="/season/{{show.id}}/{{season.season_number}}">Season {{season.season_number}}</a></li>
+      {% endfor %}
+    </ul>
 
   </body>
 </html>
