@@ -55,19 +55,17 @@ def profile(request):
         return redirect('/login')
     username = request.session['name']
     profile = Profile.objects.filter(user_id = User.objects.get(id = request.session['user']))
-<<<<<<< HEAD
 
 
     user = User.objects.get(id = request.session['user'])
+    reviews = []
+    a = MovieReview.objects.filter(movies__user_id=user)
+    for this in a:
+        reviews.append(a)
 
-    a = MovieReview.objects.filter(__movies_user_id=user)
 
 
 
-
-=======
-    # reviews = Review.objects.filter(user_id = User.objects.get(id = request.session['user']))
->>>>>>> b830972dd22dd9340ca2472dfe872faa77dfbb76
     friend, created = Friend.objects.get_or_create(current_user=User.objects.get(id = request.session['user']))
     following = friend.users.all()
     followers = Friend.objects.filter(users= User.objects.filter(id=request.session['user']))
@@ -75,13 +73,13 @@ def profile(request):
     for stuff in profile:
         profile_picture = stuff.picture
     context = {
-    'followers' : followers,
-    'following' : following,
-    'profile' : profile,
-    'username' : username,
-    'watchlist': Watchlist.objects.filter(user=request.session["user"]),
-    # 'reviews' : reviews,
-    'profile_picture': profile_picture,
+        'followers' : followers,
+        'following' : following,
+        'profile' : profile,
+        'username' : username,
+        'watchlist': Watchlist.objects.filter(user=request.session["user"]),
+        # 'reviews' : reviews,
+        'profile_picture': profile_picture,
     }
     return render(request, "User_app/profile.html", context)
 
