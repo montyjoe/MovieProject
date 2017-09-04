@@ -6,7 +6,9 @@
   </head>
   <body>
     <h1>register here</h1>
-
+    {% for message in messages %}
+      <p>{{message}}</p>
+    {% endfor %}
     <!-- User registration form  -->
     <form class="register-form" action="/register_account" method="POST">
       {% csrf_token %}

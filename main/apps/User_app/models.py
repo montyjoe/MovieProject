@@ -22,14 +22,14 @@ class UserManager(models.Manager):
             pass
             #first name validations
         if data['first_name'] == '':
-            errors.append('The First name cannot be blank')
+            errors.append('The first name cannot be blank')
         elif data['first_name'].isdigit():
-            errors.append('The First Name can only be characters!')
+            errors.append('The first name can only be characters!')
         #Last Name Validations
-        if data['first_name'] == '':
-            errors.append('The First name cannot be blank')
-        elif data['first_name'].isdigit():
-            errors.append('The First Name can only be characters!')
+        if data['last_name'] == '':
+            errors.append('The last name cannot be blank')
+        elif data['last_name'].isdigit():
+            errors.append('The last name can only be characters!')
         #email Validations
 
         if data['email'] == '':

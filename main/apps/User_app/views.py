@@ -4,6 +4,7 @@ from ..movieApp.models import Watchlist, UserReview, MovieReview, TVReview, Epis
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from . import user_services
+from django.contrib import messages
 
 
 
@@ -114,14 +115,16 @@ def register_account(request): #this function creates the account
             "password": request.POST['password']
         }
         result = User.objects.register(account_info)
-        user_id = result['user'].id
         if result['errors'] == None:
+            user_id = result['user'].id
             request.session['name'] = result['user'].first_name
             request.session['user'] = user_id
             request.session['action'] = "registered"
             UserReview.create_new(user_id)
             return redirect('/')
         else:
+            for error in result['errors']:
+                messages.add_message(request, messages.ERROR, error)
             print result['errors']
             return redirect("/register")
 
@@ -142,6 +145,8 @@ def log_user_in(request): # this is to the log the user in
             request.session['action'] = "logged in"
             return redirect('/')
         else:
+            for error in result['errors']:
+                messages.add_message(request, messages.ERROR, error)
             print result['errors']
             return redirect('/login')
 
