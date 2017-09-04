@@ -61,7 +61,28 @@ def profile(request):
     reviews = []
     a = MovieReview.objects.filter(movies__user_id=user)
     for this in a:
-        reviews.append(a)
+        entry = {
+            "title": this.title,
+            "score": this.score,
+            "content": this.content
+        }
+        reviews.append(entry)
+    b = TVReview.objects.filter(tvs__user_id=user)
+    for this in b:
+        entry = {
+            "title": this.title,
+            "score": this.score,
+            "content": this.content
+        }
+        reviews.append(entry)
+    c = EpisodeReview.objects.filter(episodes__user_id=user)
+    for this in c:
+        entry = {
+            "title": this.episode_title,
+            "score": this.score,
+            "content": this.content
+        }
+        reviews.append(entry)
 
 
 
@@ -78,7 +99,7 @@ def profile(request):
         'profile' : profile,
         'username' : username,
         'watchlist': Watchlist.objects.filter(user=request.session["user"]),
-        # 'reviews' : reviews,
+        'reviews' : reviews,
         'profile_picture': profile_picture,
     }
     return render(request, "User_app/profile.html", context)

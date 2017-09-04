@@ -6,3 +6,4 @@ from ..movieApp.models import Watchlist, UserReview, MovieReview, TVReview, Epis
 def get_reviews():
     reviews = []
     user = User.objects.get(id = request.session['user'])
+    return 
