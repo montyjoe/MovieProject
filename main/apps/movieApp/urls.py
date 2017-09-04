@@ -12,4 +12,6 @@ urlpatterns = [
     url(r'^movie_home$', views.movie_home),
     url(r'^tv_home$', views.tv_home),
     url(r'^actor_home$', views.actor_home),
+    url(r'^season/(?P<id>\d+)/(?P<season>\d+)/$', views.show_season),
+    rl(r'^episode/(?P<id>\d+)/(?P<season>\d+)/(?P<episode>\d+)$', views.show_episode),
 ]

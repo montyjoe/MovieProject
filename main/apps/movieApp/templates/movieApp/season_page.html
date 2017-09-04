@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Season Page</title>
+  </head>
+  <body>
+    <h2>{{tv_season.name}}</h2>
+    <img style="width:200px" src="https://image.tmdb.org/t/p/w500{{tv_season.poster_path}}" alt="">
+    <p>{{tv_season.overview}}</p>
+    {%for episode in tv_season.episodes %}
+    <h3><a href="#">{{episode.name}}</a></h3>
+
+    {% endfor %}
+
+  </body>
+</html>
