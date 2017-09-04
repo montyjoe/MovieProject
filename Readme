@@ -1,6 +1,10 @@
 
 *********** Installs *************
 Requests
+Pillow
+
+
+
 **********************************
 Accounts
 james@jones.com
@@ -10,14 +14,17 @@ TESTING
 
 
 =============schedule================
-30.
-31.
-
 sept-----
-1.
-2.
 3.
 4.
+  remove from watchlist on page
+  from watchlist can create a review
+  if review is created it is removed from watchlist ()
+  if review is complete turns from Review from to that review
+  how to order and re order watchlist
+  fix the searching function
+  editing profile
+
 5.
 6.
 7.
@@ -30,10 +37,10 @@ sept-----
 =============thing that are needed to be added still ================
 
 - need to fix the profile
-    -followers --done
-    -following --done
-    -info should be hidden --done
-    -recent reviews --done
+    -followers --done (complete)
+    -following --done (complete)
+    -info should be hidden --done(complete)
+    -recent reviews --done (complete)
 
 - form validations - validations are in, just need to be made prettier. no bcrypt yet
 
@@ -47,11 +54,14 @@ sept-----
 - how to figure out how to do reviews -- Mostly done
           - how much
           - how many thing to input ()
+          validations for reviews (i am currently working on)
 
 
-- movie search function
+- movie search function (complete)
 
-- new feed -- done
+- new feed (complete)
+
+
 
 - icons for things that are not in the in the database (actors movies)
 

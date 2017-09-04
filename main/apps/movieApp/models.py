@@ -35,7 +35,7 @@ class Watchlist(models.Model): #creates a watchlist
         return
 
 #this is the Model for our movies ==================
-
+ 
 
 class MovieReview(models.Model):
     user_id = models.CharField(max_length=100)
@@ -50,6 +50,13 @@ class MovieReview(models.Model):
 
     @classmethod
     def create_review(self, data):
+
+        try:
+            MovieReview.objects.get(user_id= data['user_id'])
+            print "already wrote a review"
+            return None
+        except:
+            pass
         movie = movie_services.get_movie(data['id'])['movie_info']
 
         movie_review = MovieReview.objects.create(
@@ -77,8 +84,12 @@ class TVReview(models.Model):
 
     @classmethod
     def create_review(self, data):
+        try:
+            TVReview.objects.get(user_id=data['user_id'])
+            return None
+        except:
+            pass
         tv = movie_services.get_show(data['id'])
-        user_id = request.session['user']
         tv_review = TVReview.objects.create(
             user_id = data['user_id'],
             api_code = data['id'],
@@ -106,9 +117,15 @@ class EpisodeReview(models.Model):
 
     @classmethod
     def create_review(self, data):
+        try:
+            EpisodeReview.objects.get(user_id=data['user_id'])
+            return None
+        except:
+            pass
+
         epi = movie_services.get_episode(data['id'], data['season'], data['episode'])
         season = movie_services.get_season(data['id'], data['season'])
-        user_id = request.session['user']
+
         epi_review = EpisodeReview.objects.create(
             user_id = data['user_id'],
             api_code = data['id'],
