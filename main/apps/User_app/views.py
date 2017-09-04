@@ -55,6 +55,7 @@ def profile(request):
         return redirect('/login')
     username = request.session['name']
     profile = Profile.objects.filter(user_id = User.objects.get(id = request.session['user']))
+<<<<<<< HEAD
 
 
     user = User.objects.get(id = request.session['user'])
@@ -64,6 +65,9 @@ def profile(request):
 
 
 
+=======
+    # reviews = Review.objects.filter(user_id = User.objects.get(id = request.session['user']))
+>>>>>>> b830972dd22dd9340ca2472dfe872faa77dfbb76
     friend, created = Friend.objects.get_or_create(current_user=User.objects.get(id = request.session['user']))
     following = friend.users.all()
     followers = Friend.objects.filter(users= User.objects.filter(id=request.session['user']))

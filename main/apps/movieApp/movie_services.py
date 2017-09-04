@@ -40,6 +40,19 @@ def get_show(id):
     tv_data = requests.get(tv_url).json()
     return tv_data
 
+def get_season(id, season):
+    season = season
+    print season
+    season_url = 'https://api.themoviedb.org/3/tv/' + id + '/season/' + season + '?api_key=286abf6056d0a1338f772d1b7202e728&language=en-US'
+    print season_url
+    season_data = requests.get(season_url).json()
+    return season_data
+
+def get_episode(id, season, episode):
+    episode_url = 'https://api.themoviedb.org/3/tv/' + id + '/season/' + season + '/episode/' + episode + '?api_key=<<api_key>>&language=en-US'
+    episode_data = requests.get(episode_url).json()
+    return episode_data
+
 
 def get_person(id):
 

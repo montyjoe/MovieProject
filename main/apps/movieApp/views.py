@@ -46,8 +46,15 @@ def actor_home(request):
     actors = movie_services.popular_actors()
     return render(request, 'movieApp/actors_home.html', {'actors': actors})
 
+def show_season(request, id, season):
+    print 'here'
+    tv_season = movie_services.get_season(id, season)
+    print tv_season
+    return render(request, 'movieApp/season_page.html', {'tv_season': tv_season})
 
-
+def show_episode(request, id, season, episode):
+    tv_episode = movie_services.get_episode(id, season, episode)
+    return render(request, 'movieApp/episode_page.html', {'tv_episode': tv_episode})
 
 
 
