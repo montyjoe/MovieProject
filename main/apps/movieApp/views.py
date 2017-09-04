@@ -50,7 +50,9 @@ def show_season(request, id, season):
     print 'here'
     tv_season = movie_services.get_season(id, season)
     print tv_season
-    return render(request, 'movieApp/season_page.html', {'tv_season': tv_season})
+    id = id
+    season = season
+    return render(request, 'movieApp/season_page.html', {'tv_season': tv_season, 'id' : id, 'season': season})
 
 def show_episode(request, id, season, episode):
     tv_episode = movie_services.get_episode(id, season, episode)
