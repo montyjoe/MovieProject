@@ -22,25 +22,7 @@
       );
     });
 
-    $(function() {
-      $("#places").autocomplete({
-        source: "/api/get_places",
-        select: function (event, ui) { //item selected
-          AutoCompleteSelectHandler(event, ui)
-        },
-        minLength: 2,
-      });
-
-    function AutoCompleteSelectHandler(event, ui)
-    {
-      var selectedObj = ui.item;
-      window.location = "/user/" + selectedObj.id;
-    }
-  });
-
-
-
-
+    
     $(function() {
       $("#movies").autocomplete({
         source: "/api/search_movies",
@@ -67,14 +49,6 @@
 
     </div>
     <div class="topBar">
-      <div class="ui-widget">
-        <form class="" action="/search" method="post">
-          {% csrf_token %}
-        <label for="places">Search People: </label>
-        <input name="person" id="places">
-        <input type="submit" name="search" value="Search">
-      </form>
-      </div>
 
       <div class="ui-widget">
         <form class="" action="/search" method="post">
